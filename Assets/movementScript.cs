@@ -48,9 +48,7 @@ public class movementScript : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, 0);
         }
     }
-    //private void RemoveAllForces()
-    //{
-    //    gameObject.SetActive(false);
-    //    gameObject.SetActive(true);
-    //}
+    
 }
+
+
