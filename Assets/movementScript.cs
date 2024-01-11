@@ -9,6 +9,8 @@ public class movementScript : MonoBehaviour
     private float lerpSpeed = 0.5f;
     private float movement = 0.1f;
     Rigidbody2D body;
+    [SerializeField]
+    Transform GroundCheck;
 
     public float Movement { get => movement; set => movement = value; }
 
