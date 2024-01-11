@@ -6,6 +6,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     private float speed = 300f;
+    private float jumpForce;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -18,25 +19,30 @@ public class playerController : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        jumpForce = jump();
+    }
     void FixedUpdate()
     {
-        movement(new Vector2(Input.GetAxis("Horizontal"), jump()));
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, jumpForce);
     }
 
 
-
-    void movement(Vector2 direction) 
-    {
-        rb.velocity = direction * speed * Time.deltaTime;
-    }
-
+    //Jump is janky en broken
+    //TODO: Fix deze bullshit
     float jump()
     {
-        if (IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-
+            return 10f;
         }
-        return 0f;
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && IsGrounded())
+        {
+            return rb.velocity.y * 0.5f;
+        }
+
+        return rb.velocity.y;
     }
 
     bool IsGrounded()
