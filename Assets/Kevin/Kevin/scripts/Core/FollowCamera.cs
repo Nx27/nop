@@ -4,12 +4,14 @@ namespace Kevin.Core
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Follow : MonoBehaviour {
-        [SerializeField] Transform target;
+    public class Follow : MonoBehaviour
+    {
+        [SerializeField] Transform trget;
 
         //update called once per frame
-        void update() {
-            transform.position = target.position;
+        void Update()
+        {
+            //TODO - implement logic for the moving of the camera
         }
     }
 

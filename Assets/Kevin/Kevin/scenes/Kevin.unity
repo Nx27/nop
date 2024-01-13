@@ -450,7 +450,8 @@ GameObject:
   - component: {fileID: 1023852286}
   - component: {fileID: 1023852287}
   - component: {fileID: 1023852288}
-  - component: {fileID: 1023852289}
+  - component: {fileID: 1023852290}
+  - component: {fileID: 1023852291}
   m_Layer: 0
   m_Name: Texture
   m_TagString: Untagged
@@ -537,7 +538,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07395602c2ed500469a348fc03b71fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1023852289
+  body: {fileID: 838817708}
+  groundCheck: {fileID: 1885805474}
+--- !u!114 &1023852290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023852285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6eab3e56ef0c746a5f3be3eb5bf053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trget: {fileID: 14170697}
+--- !u!114 &1023852291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
