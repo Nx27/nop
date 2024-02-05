@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class camera : MonoBehaviour
 {
-    public Transform followTransform;
+    [SerializeField]
+    private float size = 5;
+    [SerializeField]
+    private Transform followTransform;
     void Start()
     {
         
@@ -12,5 +15,10 @@ public class camera : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(followTransform.position.x, followTransform.position.y, -1f);
+    }
+
+    private void FixedUpdate()
+    {
+        Camera.main.orthographicSize = size;
     }
 }
