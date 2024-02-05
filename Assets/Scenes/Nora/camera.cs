@@ -8,6 +8,10 @@ public class camera : MonoBehaviour
     private float size = 5;
     [SerializeField]
     private Transform followTransform;
+
+    private float scrollSpeed = 0.2f;
+    public float ScrollSpeed { get => scrollSpeed; set => scrollSpeed = value; }
+
     void Start()
     {
         
@@ -19,6 +23,14 @@ public class camera : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Camera.main.orthographicSize = size;
+        if (scrollUp)
+        {
+            Camera.main.orthographicSize = size- scrollSpeed;
+        }
+        if (scrollDown)
+        {
+            Camera.main.orthographicSize = size+ scrollSpeed;
+        }
+        
     }
 }
