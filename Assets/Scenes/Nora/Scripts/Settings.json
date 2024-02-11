@@ -1,0 +1,12 @@
+{
+  "Keybinds": {
+    "Up": "W",
+    "Down": "S",
+    "Left": "A",
+    "Right": "D",
+    "ScrollUp": " Input.mouseScrollDelta",
+    "ScrollDown": " Input.mouseScrollDelta",
+    "Gun": "GetMouseButtonDown==true"
+
+  }
+}
