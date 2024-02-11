@@ -31,7 +31,6 @@ public class camera : MonoBehaviour
         {
             size = 10;
         }
-        Debug.Log(size);
         Camera.main.orthographicSize = size;
     }
 }
