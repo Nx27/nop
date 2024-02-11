@@ -18,15 +18,20 @@ public class camera : MonoBehaviour
         scroll = Input.GetAxis("Mouse ScrollWheel");
         size = -scroll + size * scrollSpeed;
         ífstatementnotworky();
-        transform.position = new Vector3(followTransform.position.x, followTransform.position.y , -1f);
+        transform.position = new Vector3(followTransform.position.x, followTransform.position.y, -1f);
     }
 
     void ífstatementnotworky()
     {
-        if (size >= 5f || size <= 10f)
+        if (size <= 5f)
         {
-            Debug.Log(size);
-            Camera.main.orthographicSize = size;
+            size = 5;
         }
+        if (size >= 10)
+        {
+            size = 10;
+        }
+        Debug.Log(size);
+        Camera.main.orthographicSize = size;
     }
 }
