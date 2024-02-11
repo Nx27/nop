@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    private float speed = 300f;
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForce = 16f;
+    [SerializeField] private float movementSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +25,19 @@ public class playerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = (new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime,jumpForce));
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        rb.velocity = (new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0f));
+
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 }

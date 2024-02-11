@@ -358,7 +358,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 838817704}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c1380b41925d24c4aab263deeccd241c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -409,7 +409,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -417,7 +417,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -439,6 +439,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   jumpForce: 10
+  movementSpeed: 0
 --- !u!1 &1023852285
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +566,7 @@ GameObject:
   - component: {fileID: 1376459941}
   - component: {fileID: 1376459942}
   - component: {fileID: 1376459943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +649,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1376459940}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c1380b41925d24c4aab263deeccd241c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
