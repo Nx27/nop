@@ -1,36 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class camera : MonoBehaviour
 {
-    [SerializeField]
-    private float size = 5;
+    private float size = 7;
     [SerializeField]
     private Transform followTransform;
 
-    private float scrollSpeed = 0.2f;
+    float scroll;
+    private float scrollSpeed = 1f;
     public float ScrollSpeed { get => scrollSpeed; set => scrollSpeed = value; }
 
-    void Start()
-    {
-        
-    }
     void Update()
     {
-        transform.position = new Vector3(followTransform.position.x, followTransform.position.y, -1f);
+        scroll = Input.GetAxis("Mouse ScrollWheel");
+        size = -scroll + size * scrollSpeed;
+        ífstatementnotworky();
+        transform.position = new Vector3(followTransform.position.x, followTransform.position.y , -1f);
     }
 
-    //    private void FixedUpdate()
-    //    {
-    //        if (scrollUp)
-    //        {
-    //            Camera.main.orthographicSize = size- scrollSpeed;
-    //        }
-    //        if (scrollDown)
-    //        {
-    //            Camera.main.orthographicSize = size+ scrollSpeed;
-    //        }
-
-    //    }
+    void ífstatementnotworky()
+    {
+        if (size >= 5f || size <= 10f)
+        {
+            Debug.Log(size);
+            Camera.main.orthographicSize = size;
+        }
+    }
 }

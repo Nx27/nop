@@ -10,19 +10,6 @@ public class playerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float jumpForce = 16f;
     [SerializeField] private float movementSpeed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
