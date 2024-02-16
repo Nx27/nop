@@ -5,28 +5,42 @@ using UnityEngine.UIElements;
 
 public class topDownMovement : MonoBehaviour
 {
+    public float _MoveSpeed { get => MoveSpeed; set => MoveSpeed = value; }
+
+
+    #region Code
+
+    #region Fields
+
     [SerializeField]
-    private float moveSpeed = 3.0f;
-    private Rigidbody2D rb;
+    private float MoveSpeed = 3.0f;
+    private Rigidbody2D Rb;
+
+    #endregion
+
+    #region Functions
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
+        Rb = GetComponent<Rigidbody2D>();
+        Rb.gravityScale = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float Horizontal = Input.GetAxis("Horizontal");
+        float Vertical = Input.GetAxis("Vertical");
 
-        Vector2 zoomies = new Vector2(horizontal, vertical);
+        Vector2 Zoomies = new Vector2(Horizontal, Vertical);
 
-        goZoomies(zoomies);
+        GoZoomies(Zoomies);
     }
 
-    void goZoomies(Vector2 Pzoomies)
+    void GoZoomies(Vector2 Zoomies)
     {
-        transform.Translate(Pzoomies * Time.deltaTime * moveSpeed, Space.World);
+        transform.Translate(Zoomies * Time.deltaTime * MoveSpeed, Space.World);
     }
 }
+#endregion
+
+#endregion
