@@ -7,7 +7,6 @@ public class topDownMovement : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 3.0f;
-    [SerializeField]
     private Rigidbody2D rb;
     void Start()
     {
