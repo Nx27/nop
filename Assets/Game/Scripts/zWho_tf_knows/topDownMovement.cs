@@ -12,7 +12,6 @@ public class topDownMovement : MonoBehaviour
 
     #region Fields
 
-    [SerializeField]
     private float MoveSpeed = 3.0f;
     private Rigidbody2D Rb;
 
