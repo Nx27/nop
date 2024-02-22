@@ -2,8 +2,10 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Runtime.Serialization;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 public class MovementScript : MonoBehaviour
 {
     public double _MoveSpeed { get => MoveSpeed; set => MoveSpeed = value; }
@@ -18,6 +20,8 @@ public class MovementScript : MonoBehaviour
     private double MoveSpeed = 10;
     private bool CanJump;
     private bool CanJumpTwice;
+    private double TimeToApex = 0.5f;
+    private double JumpHeight = 25;
 
     #endregion
 
@@ -25,43 +29,45 @@ public class MovementScript : MonoBehaviour
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            Vector2 Left = new((float)-MoveSpeed, RB.velocity.y);
-            RB.AddForce(Left);
+            Vector2 Left = new(transform.position.x - (float)MoveSpeed, transform.position.y);
+            transform.position = Vector2.Lerp(transform.position, Left, Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Vector2 Right = new((float)MoveSpeed, RB.velocity.y);
-            RB.AddForce(Right);
+            Vector2 Right = new(transform.position.x + (float)MoveSpeed, transform.position.y);
+            transform.position = Vector2.Lerp(transform.position, Right, Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && CanJumpTwice)
-        {
-            Debug.Log("jumptwice");
-            CanJumpTwice = false;
-            Vector2 Jump = new(0, 10);  
-            RB.AddForce(Jump, ForceMode2D.Impulse);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && CanJumpTwice)
+        //{
+        //    Debug.Log("jumptwice");
+        //    CanJumpTwice = false;
+        //    Vector2 JumpTwice = new(0, 100);
+        //    transform.position = Vector2.Lerp(transform.position, JumpTwice, Time.deltaTime);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space) && CanJump)
+        //{
+        //    Debug.Log("jump");
+        //    Vector2 Jump = new(0, 100);
+        //    transform.position = Vector2.Lerp(transform.position, Jump, Time.deltaTime);
+        //    CanJump = false;
+        //    CanJumpTwice = true;
+        //}
+
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
         {
-            Debug.Log("jump");
-            Vector2 Jump = new(0, 10);
-            RB.AddForce(Jump, ForceMode2D.Impulse);
-            CanJump = false;
-            CanJumpTwice = true;
+            StartCoroutine(Jump());
         }
 
-        if (RB.velocity.magnitude > 0)
-        {
-            Vector2 Oppose = -RB.velocity;
-            RB.AddForce(Oppose);
-        }
+
 
     }
 
@@ -75,7 +81,48 @@ public class MovementScript : MonoBehaviour
             CanJumpTwice = false;
         }
     }
+
+
+    IEnumerator Jump()
+    {
+        float ElapsedTime = 0f;
+        CanJump = false;
+        RB.gravityScale = 0;
+        Debug.Log("off");
+
+        float initialVelocity = (float)JumpHeight / (float)TimeToApex;
+        float initialY = transform.position.y;
+
+        while (ElapsedTime < TimeToApex)
+        {
+
+            float verticalPosition = initialY + initialVelocity * ElapsedTime - 0.5f * Mathf.Abs(Physics2D.gravity.y) * Mathf.Pow(ElapsedTime, 2);
+
+
+            Vector2 Jump = new(transform.position.x,verticalPosition);
+
+            transform.position = Vector2.Lerp(transform.position, Jump, Time.deltaTime);
+
+            yield return null;
+            
+            ElapsedTime += Time.deltaTime;
+           
+        }
+        Debug.Log("On");
+        Invoke("gravity", 0.1f);
+    }
+
+    void gravity()
+    {
+        RB.gravityScale = 1;
+    }
+
+
+
+
 }
+
+
 #endregion
 
 #endregion
