@@ -38,10 +38,10 @@ namespace GeneralUtils
                 
             }
 
-            IEnumerator RepetitionAfter() { 
-                
-                
-                
+            IEnumerator RepetitionAfter() {
+
+                ExecuteableFunction();
+
                 yield return new WaitForSeconds(IntervalOfRepeat); 
             }
 
