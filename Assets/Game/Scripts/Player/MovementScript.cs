@@ -67,6 +67,12 @@ public class MovementScript : MonoBehaviour
             StartCoroutine(Jump());
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && CanJumpTwice)
+        {
+            StopCoroutine(Jump());
+            StartCoroutine(Jump());
+        }
+
 
 
     }
