@@ -17,10 +17,9 @@ public class MovementScript : MonoBehaviour
     #region Fields
 
     private Rigidbody2D RB;
-    private double MoveSpeed = 10;
+    private double MoveSpeed = 0.1;
     private bool CanJump;
     private bool CanJumpTwice;
-    private double TimeToApex = 0.5f;
     private double JumpHeight = 25;
 
     #endregion
@@ -29,51 +28,30 @@ public class MovementScript : MonoBehaviour
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            Vector2 Left = new(transform.position.x - (float)MoveSpeed, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, Left, Time.deltaTime);
-        }
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            Vector2 Right = new(transform.position.x + (float)MoveSpeed, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, Right, Time.deltaTime);
-        }
+        Vector2 movement = new(transform.position.x + horizontalInput, RB.gravityScale);
+        RB.velocity = (movement);
 
         //if (Input.GetKeyDown(KeyCode.Space) && CanJumpTwice)
         //{
         //    Debug.Log("jumptwice");
         //    CanJumpTwice = false;
-        //    Vector2 JumpTwice = new(0, 100);
-        //    transform.position = Vector2.Lerp(transform.position, JumpTwice, Time.deltaTime);
+        //    Vector2 JumpTwice = new(RB.velocity.x, Jump);
+        //    RB.AddForce(JumpTwice);
         //}
         //if (Input.GetKeyDown(KeyCode.Space) && CanJump)
         //{
         //    Debug.Log("jump");
-        //    Vector2 Jump = new(0, 100);
-        //    transform.position = Vector2.Lerp(transform.position, Jump, Time.deltaTime);
+        //    Vector2 JumpOnce = new(RB.velocity.x, Jump);
+        //    RB.AddForce(JumpOnce);
         //    CanJump = false;
         //    CanJumpTwice = true;
         //}
-
-        if (Input.GetKeyDown(KeyCode.Space) && CanJump)
-        {
-            StartCoroutine(Jump());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && CanJumpTwice)
-        {
-            StopCoroutine(Jump());
-            StartCoroutine(Jump());
-        }
-
-
 
     }
 
@@ -87,45 +65,6 @@ public class MovementScript : MonoBehaviour
             CanJumpTwice = false;
         }
     }
-
-
-    IEnumerator Jump()
-    {
-        float ElapsedTime = 0f;
-        CanJump = false;
-        RB.gravityScale = 0;
-        Debug.Log("off");
-
-        float initialVelocity = (float)JumpHeight / (float)TimeToApex;
-        float initialY = transform.position.y;
-
-        while (ElapsedTime < TimeToApex)
-        {
-
-            float verticalPosition = initialY + initialVelocity * ElapsedTime - 0.5f * Mathf.Abs(Physics2D.gravity.y) * Mathf.Pow(ElapsedTime, 2);
-
-
-            Vector2 Jump = new(transform.position.x,verticalPosition);
-
-            transform.position = Vector2.Lerp(transform.position, Jump, Time.deltaTime);
-
-            yield return null;
-            
-            ElapsedTime += Time.deltaTime;
-           
-        }
-        Debug.Log("On");
-        Invoke("gravity", 0.1f);
-    }
-
-    void gravity()
-    {
-        RB.gravityScale = 1;
-    }
-
-
-
-
 }
 
 
