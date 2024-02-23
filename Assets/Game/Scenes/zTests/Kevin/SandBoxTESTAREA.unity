@@ -366,6 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 1883734731}
   target: {fileID: 0}
+  maxHealth: 10
+  speed: 0
 --- !u!1001 &7694124939018722834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -431,5 +433,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 192982871}
-  - {fileID: 7694124939018722834}
   - {fileID: 840871571}
+  - {fileID: 7694124939018722834}
