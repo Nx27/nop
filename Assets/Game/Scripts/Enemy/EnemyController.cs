@@ -6,32 +6,22 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] float maxHealth = 10;
-    [SerializeField] float speed = 1;
-
-    private float health;
+    [SerializeField] double MaxHealth = 10;
+    [SerializeField] double Speed = 1;
+    
+    private float Health;
 
     #endregion
 
     #region Code
 
-    void Start()
-    {
-        body = gameObject.AddComponent<Rigidbody2D>();
+    private void OnTriggerEnter2D(UnityEngine.Collider2D collision) {
+        GameObject other = collision.gameObject;
+        Debug.Log("fml");
     }
 
-    void Update()
-    {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-       
-
-
-    }
+}
 
     #endregion
 
-}
+
