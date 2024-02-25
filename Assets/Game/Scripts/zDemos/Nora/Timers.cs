@@ -27,7 +27,7 @@ namespace GeneralUtils
                 while (Seconds > 0)
                 {
                     Seconds -= Time.deltaTime;
-                    Debug.Log(Seconds);
+                    //Debug.Log(Seconds);
                     yield return new WaitForFixedUpdate();
                 }
 
