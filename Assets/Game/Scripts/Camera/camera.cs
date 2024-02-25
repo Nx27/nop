@@ -17,11 +17,11 @@ public class camera : MonoBehaviour
     {
         scroll = Input.GetAxis("Mouse ScrollWheel");
         size = -scroll + size * scrollSpeed;
-        ífstatementnotworky();
+        Ifstatementnotworky();
         transform.position = new Vector3(followTransform.position.x, followTransform.position.y, -1f);
     }
 
-    void ífstatementnotworky()
+    void Ifstatementnotworky()
     {
         if (size <= 5f)
         {
