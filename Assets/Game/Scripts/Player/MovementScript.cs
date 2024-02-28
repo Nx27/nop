@@ -1,9 +1,8 @@
 using UnityEngine;
 
+#region Code
 public class MovementScript : MonoBehaviour
 {
-    #region Code
-
     #region SerializeFields
     [SerializeField] private float speed = 6f;
     [SerializeField] private float jumpForce = 7f;
@@ -14,6 +13,13 @@ public class MovementScript : MonoBehaviour
     #region Fields
     private bool _canJump = true;
     private bool _canJumpTwice = true;
+    public DashState dashState;
+    public float dashTimer;
+    public float maxDash = 1f;
+    private float maxDashSpeed = 10f;
+
+    public Vector2 savedVelocity;
+
     #endregion
 
     #region Function
@@ -42,9 +48,47 @@ public class MovementScript : MonoBehaviour
             }
         }
         #endregion
+
+        #region Dashing logic
+        switch (dashState)
+        {
+            case DashState.Ready:
+                var isDashKeyDown = Input.GetKeyDown(KeyCode.LeftShift);
+                if (isDashKeyDown)
+                {
+                    savedVelocity = RB.velocity;
+                    RB.AddForce(new Vector2(RB.velocity.x * maxDashSpeed, RB.velocity.y));
+                    dashState = DashState.Dashing;
+                }
+                break;
+            case DashState.Dashing:
+                dashTimer += Time.deltaTime * maxDashSpeed;
+                if (dashTimer >= maxDash)
+                {
+                    dashTimer = maxDash;
+                    RB.velocity = savedVelocity;
+                    dashState = DashState.Cooldown;
+                }
+                break;
+            case DashState.Cooldown:
+                dashTimer -= Time.deltaTime;
+                if (dashTimer <= 0)
+                {
+                    dashTimer = 0;
+                    dashState = DashState.Ready;
+                }
+                break;
+        }
+        #endregion
     }
-
-    #endregion
-
     #endregion
 }
+#endregion
+#region ENUM DashState
+public enum DashState
+{
+    Ready,
+    Dashing,
+    Cooldown
+}
+#endregion
